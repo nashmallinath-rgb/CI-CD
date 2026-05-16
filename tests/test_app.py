@@ -1,10 +1,10 @@
 """Tests for the FastAPI application."""
-from fastapi.testclient import TestClient
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent.parent / "app"))
-from main import app
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from app.main import app  # noqa: E402
+from fastapi.testclient import TestClient  # noqa: E402
 
 client = TestClient(app)
 
