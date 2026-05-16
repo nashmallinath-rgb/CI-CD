@@ -185,6 +185,7 @@ jobs:
 
     steps:
       - name: Send Slack notification
+        if: env.SLACK_WEBHOOK != ''
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         run: |
