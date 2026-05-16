@@ -3,7 +3,6 @@ FastAPI application — the target app for the CI/CD pipeline demo.
 Provides a simple but real API with health, metrics, and crypto endpoints.
 """
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import JSONResponse
 import time
 import platform
 
