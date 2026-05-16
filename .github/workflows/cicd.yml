@@ -155,6 +155,7 @@ jobs:
 
       - name: Deploy to Render
         id: deploy
+        if: env.RENDER_DEPLOY_HOOK != ''
         env:
           RENDER_DEPLOY_HOOK: ${{ secrets.RENDER_DEPLOY_HOOK }}
         run: |
@@ -164,11 +165,13 @@ jobs:
           echo "url=https://your-app.onrender.com" >> $GITHUB_OUTPUT
 
       - name: Wait for deployment
+        if: steps.deploy.outcome == 'success'
         run: |
           echo "Waiting 30s for deployment to propagate..."
           sleep 30
 
       - name: Smoke test production
+        if: steps.deploy.outcome == 'success'
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" https://your-app.onrender.com/health)
           if [ "$STATUS" != "200" ]; then
